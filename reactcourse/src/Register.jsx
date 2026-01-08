@@ -1,30 +1,25 @@
 import { useState } from "react";
 
-function Login({ setIsLoggedIn, setShowRegister }) {
+function Register({ setShowRegister }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  const handleLogin = (e) => {
+  const handleRegister = (e) => {
     e.preventDefault();
 
-    const savedUser = JSON.parse(localStorage.getItem("user"));
+    // Save user in localStorage
+    const user = { email, password };
+    localStorage.setItem("user", JSON.stringify(user));
 
-    if (
-      savedUser &&
-      email === savedUser.email &&
-      password === savedUser.password
-    ) {
-      setIsLoggedIn(true);
-    } else {
-      alert("Invalid login details");
-    }
+    alert("Registration successful!");
+    setShowRegister(false); // go to login
   };
 
   return (
     <div className="card">
-      <h2>Login</h2>
+      <h2>Register</h2>
 
-      <form onSubmit={handleLogin}>
+      <form onSubmit={handleRegister}>
         <input
           type="email"
           placeholder="Email"
@@ -41,15 +36,15 @@ function Login({ setIsLoggedIn, setShowRegister }) {
           required
         />
 
-        <button type="submit">Login</button>
+        <button type="submit">Register</button>
       </form>
 
       <p>
-        New user?{" "}
-        <span onClick={() => setShowRegister(true)}>Register</span>
+        Already have an account?{" "}
+        <span onClick={() => setShowRegister(false)}>Login</span>
       </p>
     </div>
   );
 }
 
-export default Login;
+export default Register;

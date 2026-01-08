@@ -1,6 +1,6 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f0f2f5;
+  background: #f2f2f2;
 }
 
 .card {
@@ -29,4 +29,9 @@ button {
 
 button:hover {
   background: #0056b3;
+}
+
+span {
+  color: blue;
+  cursor: pointer;
 }
