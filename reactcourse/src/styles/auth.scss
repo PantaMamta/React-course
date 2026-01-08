@@ -1,0 +1,51 @@
+@import "./variables";
+
+.auth-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: $bg;
+  padding: 1rem;
+}
+
+.auth-card {
+  background: white;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+
+  input {
+    width: 100%;
+    padding: 0.7rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  button {
+    width: 100%;
+    padding: 0.7rem;
+    background: $primary;
+    color: white;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+
+  p {
+    margin-top: 1rem;
+    text-align: center;
+  }
+
+  a {
+    color: $primary;
+    text-decoration: none;
+  }
+}

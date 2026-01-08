@@ -1,3 +1,4 @@
+import "../styles/dashboard.scss";
 import { useNavigate } from "react-router-dom";
 
 function Dashboard() {
@@ -9,17 +10,10 @@ function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-green-100">
-      <div className="bg-white p-6 rounded shadow text-center">
-        <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
-        <p className="mb-4">You are logged in 🎉</p>
-        <button
-          onClick={logout}
-          className="bg-red-500 text-white px-4 py-2 rounded"
-        >
-          Logout
-        </button>
-      </div>
+    <div className="dashboard">
+      <h1>Welcome 🎉</h1>
+      <p>You are logged in</p>
+      <button onClick={logout}>Logout</button>
     </div>
   );
 }

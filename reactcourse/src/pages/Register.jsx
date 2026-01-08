@@ -1,45 +1,77 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import "../styles/auth.scss";
 
 function Register() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
+
   const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
 
   const handleRegister = (e) => {
     e.preventDefault();
-    localStorage.setItem("user", JSON.stringify({ email, password }));
-    alert("Registered successfully!");
+
+    if (form.password !== form.confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
+
+    localStorage.setItem("user", JSON.stringify(form));
+    alert("Registration successful!");
     navigate("/login");
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <form
-        onSubmit={handleRegister}
-        className="bg-white p-6 rounded shadow w-80"
-      >
-        <h2 className="text-xl font-bold mb-4 text-center">Register</h2>
+    <div className="auth-container">
+      <form className="auth-card" onSubmit={handleRegister}>
+        <h2>Create Account</h2>
 
         <input
-          className="border p-2 w-full mb-3"
+          type="text"
+          name="name"
+          placeholder="Full Name"
+          onChange={handleChange}
+          required
+        />
+
+        <input
           type="email"
+          name="email"
           placeholder="Email"
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={handleChange}
           required
         />
 
         <input
-          className="border p-2 w-full mb-3"
           type="password"
+          name="password"
           placeholder="Password"
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={handleChange}
           required
         />
 
-        <button className="bg-blue-500 text-white w-full p-2 rounded">
-          Register
-        </button>
+        <input
+          type="password"
+          name="confirmPassword"
+          placeholder="Confirm Password"
+          onChange={handleChange}
+          required
+        />
+
+        <button type="submit">Register</button>
+
+        <p>
+          Already have an account?{" "}
+          <Link to="/login">Login</Link>
+        </p>
       </form>
     </div>
   );
