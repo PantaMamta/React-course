@@ -1,25 +1,24 @@
-import { useState } from "react";
-import Login from "./Login";
-import Register from "./Register";
-import Dashboard from "./Dashboard";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [showRegister, setShowRegister] = useState(false);
+  const isLoggedIn = localStorage.getItem("isLoggedIn");
 
-  // If user is logged in → show dashboard
-  if (isLoggedIn) {
-    return <Dashboard setIsLoggedIn={setIsLoggedIn} />;
-  }
+  return (
+    <Routes>
+      <Route path="/" element={<Navigate to="/login" />} />
+      <Route path="/login" element={<Login />} />
+      <Route path="/register" element={<Register />} />
 
-  // Otherwise show Login or Register
-  return showRegister ? (
-    <Register setShowRegister={setShowRegister} />
-  ) : (
-    <Login
-      setIsLoggedIn={setIsLoggedIn}
-      setShowRegister={setShowRegister}
-    />
+      <Route
+        path="/dashboard"
+        element={
+          isLoggedIn ? <Dashboard /> : <Navigate to="/login" />
+        }
+      />
+    </Routes>
   );
 }
 
